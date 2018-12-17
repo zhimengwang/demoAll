@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    const a = (next) => {
+        return () => {
+            console.log('a pre');
+            next(); //执行b(c(d()));
+            console.log('a after');
+        }
+    }
+
+    const b = (next) => {
+        return () => {
+            console.log('b pre');
+            next(); // 执行c(d());
+            console.log('b after');
+        }
+    }
+
+    const c = (next) => {
+        return () => {
+            console.log('c pre');
+            next(); //执行  d();
+            console.log('c after');
+        }
+    }
+
+    const d = () => {
+        console.log('Hello World');
+    }
+
+   function compose(...cbList){
+        return cbList.reduce((a,b)=>{
+            return (...arg)=>{
+                return a(b(...arg))
+            }
+        })
+   }
+
+    console.log(compose(a, b, c)(d)())
+</script>
+
+</body>
+</html>

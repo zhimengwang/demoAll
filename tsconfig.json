@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "types": [
+      "mocha",
+      "chai"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "target": "es6",
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "isolatedModules": true
+  }
+}

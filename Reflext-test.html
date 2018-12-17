@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let p = {
+        a: 'a',
+        get baz() {
+            return this.a;
+        },
+    };
+    let handler = {
+        get,
+        set
+    }
+    function get(target, key, receiver) {
+        // const result = Reflect.get(target, key, receiver)
+
+        return target[key]
+    }
+    function set(target, key, value, receiver) {
+        return Reflect.set(target, key, value, receiver)
+    }
+    var inherits = Object.create(p);
+    let obj = new Proxy(inherits, handler);
+    // obj.a='b'
+</script>
+
+</body>
+</html>

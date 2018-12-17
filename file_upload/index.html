@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="">
+    <input type="file" id="upload" onfocus="this.blur()" accept="image/*"/>
+</form>
+<script>
+    var file = document.getElementById("upload");
+    console.log(file.files);
+    alert(JSON.stringify(file.files))
+</script>
+</body>
+</html>

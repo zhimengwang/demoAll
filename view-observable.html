@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+    /* 映射被监听对象属性到监听函数集，监听函数集会使用监听对象属性 */
+    /***
+     observers:WeakMap{
+        obj<Object>:Map{
+            obj-key:Set<function>
+        }
+    }
+     ***/
+    const observers = new WeakMap()
+
+    /* 指向当前运行的监听函数可以为 undefined */
+    let currentObserver
+
+    /* 利用把对象封装为一个代理来把对象转换为一个可监听对象，
+    它也可以添加一个空白映射，用作以后保存被监听对象－监听函数对。
+    */
+    function observable(obj) {
+        observers.set(obj, new Map())
+        return new Proxy(obj, {get, set})
+    }
+
+    /* 这个陷阱拦截 get 操作，如果当前没有执行监听函数它不做任何事 */
+    function get(target, key, receiver) {
+        // 防止继承.receiver target 指向不同 so 不可用target[key]
+        const result = Reflect.get(target, key, receiver)
+        if (currentObserver) {
+            registerObserver(target, key, currentObserver)
+        }
+        return result
+    }
+
+    /* 如果一个监听函数正在运行，这个函数会配对监听函数和当前取得的被
+    监听对象属性，并保存到一个监听函数映射之中 */
+    function registerObserver(target, key, observer) {
+        let observersForKey = observers.get(target).get(key)
+        if (!observersForKey) {
+            observersForKey = new Set()
+            observers.get(target).set(key, observersForKey)
+        }
+        observersForKey.add(observer)
+    }
+
+    /* 这个陷阱拦截 set 操作，它把每个关联当前 set 属性的监听函数加入队列以备之后执行 */
+    function set(target, key, value, receiver) {
+        const observersForKey = observers.get(target).get(key)
+        if (observersForKey) {
+            observersForKey.forEach(queueObserver)
+        }
+        return Reflect.set(target, key, value, receiver)
+    }
+
+
+    /* contains the triggered observer functions,
+which should run soon */
+    /**
+     * cb队列
+     * */
+    const queuedObservers = new Set()
+
+    /* the exposed observe function */
+    /***
+     * 注册cb
+     * 执行一次
+     * 通过getter
+     * 绑定cb
+     * 不支持深度递归
+     **/
+    function observe(fn) {
+        queueObserver(fn)
+    }
+
+    /* adds the observer to the queue and
+    ensures that the queue will be executed soon */
+    function queueObserver(observer) {
+        if (queuedObservers.size === 0) {
+            Promise.resolve().then(runObservers)
+        }
+        queuedObservers.add(observer)
+    }
+
+    /* runs the queued observers,
+    currentObserver is set to undefined in the end */
+    function runObservers() {
+        try {
+            queuedObservers.forEach(runObserver)
+        } finally {
+            currentObserver = undefined
+            queuedObservers.clear()
+        }
+    }
+
+    /* sets the global currentObserver to observer,
+    then executes it */
+    /**
+     *
+     * 将observer暴露给全局并命名为currentObserver
+     * 然后执行通过全局暴露传递getter
+     ***/
+    function runObserver(observer) {
+        currentObserver = observer
+        observer()
+    }
+
+
+    // this is an observable object
+    const person = observable({name: 'John', age: 20, sex: {test: '123'}});
+
+    function print() {
+        console.log(`${person.name}, ${person.age},${person.sex.test}`)
+    }
+
+    // this creates an observer function
+    // outputs 'John, 20' to the console
+    observe(print);
+
+    // outputs 'Dave, 20' to the console
+    // setTimeout(() => person.sex = {'test':'Dave'}, 100);
+
+    // outputs 'Dave, 22' to the console
+    setTimeout(() => person.age = 22, 200)
+</script>
+</body>
+</html>

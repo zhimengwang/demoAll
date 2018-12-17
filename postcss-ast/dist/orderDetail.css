@@ -1,0 +1,192 @@
+.distribution-box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 1.4rem;
+    background-image: url("http:\img.ddky.com\distribution_bg.png");
+    background: url("http:\img.ddky.com\test.jpg") repeat-y;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 0 .30rem;
+}
+body{
+	width:7.5rem;
+	margin: 0 auto;
+    height: 100%;
+}
+#app{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-bottom: .88rem;
+}
+.footerpadding{
+    padding-bottom: .85rem;
+}
+.container{
+    height: 100%;
+    overflow-y:auto;
+}
+
+
+.distribution-box > div {
+    display: flex;
+    align-items: center;
+}
+
+.distribution-info {
+    line-height: .44rem;
+    font-size: .32rem;
+    color: #fff;
+}
+
+.tick-img {
+    width: .36rem;
+    height: .36rem;
+    margin-right: .25rem;
+}
+
+.arrow-img {
+    width: .13rem;
+    height: .23rem;
+}
+
+.order-status {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    height: 1.4rem;
+    margin-bottom: .2rem;
+    padding: .28rem .3rem;
+}
+
+.order-status-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.order-status-detail {
+    font-size: .28rem;
+    color: #333333;
+    line-height: .4rem;
+    margin-bottom: .1rem;
+}
+
+.order-status-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.order-status-time {
+    font-size: .24rem;
+    line-height: .34rem;
+    color: #888888;
+}
+
+.status-text {
+    color: #FF5A5F;
+    font-size: .32rem;
+    line-height: .44rem;
+    margin-right: .2rem;
+}
+
+.address {
+    background-color: #ffffff;
+    min-height: 1.4rem;
+    margin-bottom: .2rem;
+    padding: .28rem .3rem;
+}
+
+.user-info {
+    margin-bottom: .1rem;
+}
+
+.name {
+    color: #333333;
+    font-size: .28rem;
+    line-height: .4rem;
+    margin-right: .4rem;
+}
+
+.phone {
+    color: #333333;
+}
+.address{
+    font-size: .24rem;
+    line-height: .34rem;
+}
+.price-info-list{
+    background-color: #ffffff;
+    padding: .24rem .3rem;
+    display: flex;
+    flex-direction: column;
+    font-size: .24rem;
+    line-height: .34rem;
+    color: #888888;
+}
+.price-info{
+    display: flex;
+    justify-content: space-between;
+
+}
+.total-amount-row{
+    background-color: #ffffff;
+    padding: .24rem .3rem;
+    display: flex;
+    font-size: .24rem;
+    justify-content: space-between;
+    line-height: .34rem;
+    color: #888888;
+    border-top: 1px solid #eeeeee;
+}
+.total-text{
+    color: #333333;
+}
+.total-num{
+    color: #E94544;
+    font-size: .28rem;
+    line-height: .4rem;
+}
+.footer{
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+    width: 100%;
+    height: .88rem;
+    padding: .18rem .3rem;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #ffffff;
+    border-top: 1px solid #cbcbcb;
+}
+.footer button{
+    height: .52rem;
+    font-size: .24rem;
+    line-height: .24rem;
+    margin-left: .3rem;
+    display: inline-block;
+    padding: .14rem .2rem;
+    color: #E94544 ;
+    border:1px solid #E94544;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+.order-detail-list{
+    margin-top: .2rem;
+}
+.desc{
+    display: flex;
+    justify-content: space-between;
+    align-items:flex-start;
+    min-height: .68rem;
+}
+.desc p{
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+    max-width: 5.28rem;
+}

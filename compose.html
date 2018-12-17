@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    const a = (next) => {
+        return () => {
+            console.log('a pre');
+            next(); //执行b(c(d()));
+            console.log('a after');
+        }
+    }
+
+    const b = (next) => {
+        return () => {
+            console.log('b pre');
+            next(); // 执行c(d());
+            console.log('b after');
+        }
+    }
+
+    const c = (next) => {
+        return () => {
+            console.log('c pre');
+            next(); //执行  d();
+            console.log('c after');
+        }
+    }
+
+    const d = () => {
+        console.log('Hello World');
+    }
+
+    function compose(...funcs) {
+        return funcs.reduce((a, b) => {
+            return (...args) => {
+                return a(b(...args))
+            }
+        })
+    }
+
+    // var dd = compose(a, b, c)
+    // console.log(compose(a, b, c))
+    // console.log(compose(a, b, c)(d))
+    /**
+     * (缓存队列)（注入参数）（队列开始执行）
+     */
+    console.log(compose(a, b, c)(d)())
+</script>
+
+<!--<script>-->
+    <!--const a = (next) => {-->
+        <!--console.log('a pre');-->
+        <!--console.log('a after');-->
+    <!--}-->
+
+    <!--const b = (next) => {-->
+        <!--console.log('b pre');-->
+        <!--console.log('b after');-->
+    <!--}-->
+
+    <!--const c = (next) => {-->
+        <!--console.log('c pre');-->
+        <!--console.log('c after');-->
+    <!--}-->
+
+
+    <!--a(b(c()))-->
+
+<!--</script>-->
+</body>
+</html>

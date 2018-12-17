@@ -1,0 +1,111 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "The cats API description",
+    "version": "1.0",
+    "title": "Cats example"
+  },
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/cats": {
+      "post": {
+        "summary": "Create cat",
+        "parameters": [
+          {
+            "name": "CreateCatDto",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateCatDto"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The record has been successfully created."
+          },
+          "403": {
+            "description": "Forbidden."
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/json"
+        ],
+        "tags": [
+          "cats"
+        ],
+        "consumes": [
+          "application/json",
+          "application/json"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/cats/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "required": true,
+            "in": "path"
+          }
+        ],
+        "responses": {},
+        "produces": [
+          "application/json",
+          "application/json"
+        ],
+        "tags": [
+          "cats"
+        ],
+        "consumes": [
+          "application/json",
+          "application/json"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CreateCatDto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "age": {
+          "type": "number"
+        },
+        "breed": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "age",
+        "breed"
+      ]
+    }
+  }
+}

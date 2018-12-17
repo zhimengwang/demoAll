@@ -1,0 +1,26 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "dependencies": {
+    "gcoord": "^0.1.2",
+    "postcss": "^7.0.5",
+    "rx": "^4.1.0",
+    "rxjs": "^5.5.10",
+    "swagger-axios-codegen": "^0.2.14",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./trees/*.spec.ts"
+  },
+  "author": "",
+  "license": "ISC"
+}

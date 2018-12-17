@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>传统网页调起</title>
+    <script type="text/javascript" src="//statres.quickapp.cn/quickapp/js/routerinline.min.js"></script>
+</head>
+<body>
+<!-- 调起应用 -->
+<script type="text/javascript">
+    // 无需用户确认的调用方式，xxx.yyy.zzz为包名
+    appRouter("ddkyHw", "Home", { a: 1, b: 'abc' });
+    // 需要用户确认的调用方式，xxx.yyy.zzz为包名
+    appRouter('ddkyHw', 'Home', { a: 1, b: 'abc' }, '显示给用户的应用名称');
+</script>
+
+<!-- 检测平台是否支持服务 -->
+<script type="text/javascript">
+    // 通过传递回调函数实现
+    channelReady(function (bAvailable) {
+        alert("是否存在框架服务：" + bAvailable)
+    });
+</script>
+</body>
+</html>

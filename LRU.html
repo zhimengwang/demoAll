@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="LRU.js">
+</script>
+<script>
+    let c = new LRUMap(3)
+    c.set('adam',   29)
+    c.set('john',   26)
+    c.set('angela', 24)
+    // for(item of c){
+    //     console.log(item);
+    // }
+    let record = c.newest
+    for(record;record!=null;record = record[Symbol('older')]){
+        console.log(record);
+    }
+    // c.toString()        // -> "adam:29 < john:26 < angela:24"
+    // c.get('john')
+</script>
+</body>
+</html>
